@@ -1,21 +1,41 @@
 # Clase base
-class Animal:
-    def _init_(self, nombre):
-        self.nombre = nombre
+class Vehiculo:
+    def __init__(self, marca, modelo, año):
+        self.marca = marca
+        self.modelo = modelo
+        self.año = año
 
-    def hacer_sonido(self):
-        pass
+    def info(self):
+        return f"Vehículo: {self.marca} {self.modelo}, Año: {self.año}"
 
-# Clases derivadas
-class Gato(Animal):
-    def hacer_sonido(self):
-        return "Miau!"
+# Clase derivada: Coche
+class Coche(Vehiculo):
+    def __init__(self, marca, modelo, año, consumo):
+        super().__init__(marca, modelo, año)
+        self.consumo = consumo  # Consumo en litros cada 100 km
 
-class Gato(Animal):
-    def hacer_sonido(self):
-        return "Guau!"
+    def calcular_consumo(self, distancia):
+        # Calcula el combustible necesario para una distancia dada
+        return (distancia / 100) * self.consumo
 
-# Uso
-animales = [Gato("Tomas"), Perro("Dante")]
-for animal in animales:
-    print(f"{animal.nombre} dice: {animal.hacer_sonido()}")
+# Clase derivada: Bicicleta
+class Bicicleta(Vehiculo):
+    def __init__(self, marca, modelo, año, tiene_cambios):
+        super().__init__(marca, modelo, año)
+        self.tiene_cambios = tiene_cambios
+
+    def info(self):
+        base_info = super().info()
+        cambios_info = "Con cambios" if self.tiene_cambios else "Sin cambios"
+        return f"{base_info}. {cambios_info}"
+
+# Creación de instancias
+coche1 = Coche("Toyota", "Corolla", 2020, 6.5)
+bicicleta1 = Bicicleta("Giant", "Escape", 2022, True)
+
+# Uso de los métodos
+print(coche1.info())  # Salida: Vehículo: Toyota Corolla, Año: 2020
+print(f"Consumo para 150 km: {coche1.calcular_consumo(150)} litros")  # Salida: Consumo para 150 km: 9.75 litros
+
+print(bicicleta1.info())  # Salida: Vehículo: Giant Escape, Año: 2022. Con cambios
+

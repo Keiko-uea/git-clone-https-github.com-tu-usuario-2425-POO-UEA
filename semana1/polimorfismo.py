@@ -1,16 +1,19 @@
 class Vehiculo:
     def mover(self):
-        pass
-
-class Camion(Vehiculo):
+        raise NotImplementedError("Este método debe ser implementado por subclases")
+class Coche(Vehiculo):
     def mover(self):
-        return "El camion está conduciendo."
+        return "El coche se mueve por la carretera."
 
-class Avion(Vehiculo):
+class Bicicleta(Vehiculo):
     def mover(self):
-        return "El avion está volando."
+        return "La bicicleta se mueve pedaleando."
+def main():
+    vehiculos = [Coche(), Bicicleta()]
 
-# Uso
-vehiculos = [Camion(), Avion()]
-for vehiculo in vehiculos:
-    print(vehiculo.mover())
+    for vehiculo in vehiculos:
+        print(vehiculo.mover())
+
+if __name__ == "__main__":
+    main()
+
